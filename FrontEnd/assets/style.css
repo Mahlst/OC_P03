@@ -47,6 +47,10 @@ table {
 	border-spacing: 0;
 }
 /** end reset css**/
+.pointer {
+	cursor: pointer;
+}
+
 body {
 	max-width: 1140px;
 	margin:auto;
@@ -121,10 +125,34 @@ li:hover {
 #introduction p {
 	margin-bottom: 0.5em;
 }
+
 #portfolio h2 {
 	text-align: center;
-	margin-bottom: 1em;
+	margin-bottom: 2em;
 }
+
+#portfolio .filter {
+	text-align: center;
+	padding-bottom: 4em;
+}
+
+#portfolio .filter button {
+	font-size: 16px;
+	font-weight: 700;
+	font-family: "Syne", sans-serif;
+	background-color: #FFF;
+	color: #1D6154;
+	border: 1px solid #1D6154;
+	border-radius: 60px;
+	padding: 9px 21px;
+	margin: 0 0.2em;
+}
+
+#portfolio .filter button:hover {
+	background-color: #1D6154;
+	color: #FFFFFF;
+}
+
 .gallery {
 	width: 100%;
 	display: grid;
