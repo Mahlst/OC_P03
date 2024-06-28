@@ -13,6 +13,9 @@ async function initializeFilters() {
 
         // Crée les boutons de filtre avec les catégories récupérées
         createFilterButtons(categories);
+
+        // Ajoute les écouteurs d'événements aux boutons de filtre
+        addFilterButtonListeners();
     }
 }
 
@@ -52,10 +55,47 @@ function createFilterButtons(categories) {
         // Crée un nouvel élément de bouton
         let button = document.createElement("button");
 
+        // Ajoute un attribut data-category avec l'ID de la catégorie au bouton
+        button.setAttribute("data-category", category.id);
+
         // Définit le texte du bouton avec le nom de la catégorie
         button.textContent = category.name;
 
         // Ajoute le bouton au conteneur des filtres
         filterContainer.appendChild(button);
+    });
+}
+
+// Fonction pour ajouter des écouteurs d'événements aux boutons de filtre
+function addFilterButtonListeners() {
+    // Sélectionne tous les boutons de filtre dans le conteneur
+    const buttons = document.querySelectorAll("div.filter button");
+
+    // Ajoute un écouteur d'événement à chaque bouton
+    buttons.forEach(button => {
+        button.addEventListener("click", () => {
+            // Récupère la catégorie associée au bouton cliqué
+            const category = button.getAttribute("data-category");
+
+            // Filtre les projets en fonction de la catégorie sélectionnée
+            filterProjects(category);
+        });
+    });
+}
+
+// Fonction pour filtrer les projets en fonction de la catégorie sélectionnée
+function filterProjects(category) {
+    // Sélectionne tous les projets dans la galerie
+    const projects = document.querySelectorAll("div.gallery figure");
+
+    // Parcourt chaque projet pour appliquer le filtre
+    projects.forEach(project => {
+        // Affiche le projet si la catégorie est "Tous" ou correspond à celle du projet
+        if (category === "0" || project.getAttribute("data-category") === category) {
+            project.style.display = "";
+        } else {
+            // Masque le projet si la catégorie ne correspond pas
+            project.style.display = "none";
+        }
     });
 }

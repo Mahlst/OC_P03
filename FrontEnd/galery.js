@@ -48,6 +48,8 @@ function createProjets(projets) {
     projets.forEach(projet => {
         // Crée un élément <figure> pour chaque projet
         let figure = document.createElement("figure");
+        // Ajoute un attribut data-category avec l'ID de la catégorie du projet
+        figure.setAttribute("data-category", projet.categoryId)
         // Ajoute l'élément <figure> au conteneur de la galerie
         projetsContainer.appendChild(figure);
 
