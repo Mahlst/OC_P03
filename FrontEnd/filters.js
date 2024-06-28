@@ -58,6 +58,9 @@ function createFilterButtons(categories) {
         // Ajoute un attribut data-category avec l'ID de la catégorie au bouton
         button.setAttribute("data-category", category.id);
 
+        // Si la catégorie est "Tous", ajoute une classe pour indiquer qu'il est actif
+        category.id === 0 && button.classList.add("filter-active");
+
         // Définit le texte du bouton avec le nom de la catégorie
         button.textContent = category.name;
 
@@ -74,6 +77,12 @@ function addFilterButtonListeners() {
     // Ajoute un écouteur d'événement à chaque bouton
     buttons.forEach(button => {
         button.addEventListener("click", () => {
+            // Retire la classe 'filter-active' de tous les boutons
+            buttons.forEach(button => button.classList.remove('filter-active'));
+
+            // Ajoute la classe 'filter-active' au bouton cliqué
+            button.classList.add('filter-active');
+            
             // Récupère la catégorie associée au bouton cliqué
             const category = button.getAttribute("data-category");
 
@@ -97,5 +106,7 @@ function filterProjects(category) {
             // Masque le projet si la catégorie ne correspond pas
             project.style.display = "none";
         }
+        
     });
+    
 }
