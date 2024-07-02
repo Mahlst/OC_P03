@@ -94,19 +94,23 @@ function addFilterButtonListeners() {
 
 // Fonction pour filtrer les projets en fonction de la catégorie sélectionnée
 function filterProjects(category) {
-    // Sélectionne tous les projets dans la galerie
-    const projects = document.querySelectorAll("div.gallery figure");
+    // Sélectionne tous les éléments <figure> dans le conteneur de la galerie et les convertit en tableau
+    const projects = Array.from(document.querySelectorAll("div.gallery figure"));
 
-    // Parcourt chaque projet pour appliquer le filtre
+    // Filtre les projets selon la catégorie sélectionnée
+    const filteredProjects = projects.filter(project => {
+        // Retourne true si la catégorie est "0" (tous les projets) ou si la catégorie du projet correspond à celle sélectionnée
+        return category === "0" || project.getAttribute("data-category") === category;
+    });
+
+    // Parcourt chaque projet pour afficher les projets filtrés et masquer les autres
     projects.forEach(project => {
-        // Affiche le projet si la catégorie est "Tous" ou correspond à celle du projet
-        if (category === "0" || project.getAttribute("data-category") === category) {
+        // Si le projet est dans la liste des projets filtrés, il est affiché
+        if (filteredProjects.includes(project)) {
             project.style.display = "";
         } else {
-            // Masque le projet si la catégorie ne correspond pas
+            // Sinon, il est masqué
             project.style.display = "none";
         }
-        
     });
-    
 }
