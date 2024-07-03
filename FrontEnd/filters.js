@@ -57,6 +57,8 @@ function createFilterButtons(categories) {
 
         // Ajoute un attribut data-category avec l'ID de la catégorie au bouton
         button.setAttribute("data-category", category.id);
+        // Ajoute la classe 'pointer' au bouton cliqué
+        button.classList.add('pointer');
 
         // Si la catégorie est "Tous", ajoute une classe pour indiquer qu'il est actif
         category.id === 0 && button.classList.add("filter-active");
