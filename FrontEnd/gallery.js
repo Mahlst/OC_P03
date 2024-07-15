@@ -76,6 +76,9 @@ function displayProjectsCards(projects) {
         console.error("Le conteneur de la galerie n'a pas été trouvé.");
         return; // Arrête l'exécution de la fonction si le conteneur n'existe pas
     }
+    
+    // Efface le contenu précédent pour éviter la duplication
+    projectsContainer.innerHTML = ""; 
 
     // Parcourt chaque projet récupéré
     projects.forEach(project => {
