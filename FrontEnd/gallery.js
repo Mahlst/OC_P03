@@ -1,24 +1,3 @@
-// Fonction principale pour initialiser l'application
-async function initializeProjects() {
-    // Définit l'URL de l'API des projets
-    const apiUrl = "http://localhost:5678/api/works";
-
-    // Récupère les projets depuis l'API
-    const projects = await fetchProjects(apiUrl);
-
-    // Si les projets sont récupérés avec succès
-    if (projects) {
-        // Affiche les projets dans la console pour vérification
-        console.log(projects);
-
-        // Crée les cartes avec les projets récupérés
-        displayProjectsCards(projects);
-    }
-}
-
-// Ajoute un écouteur d'événement pour initialiser les projets lorsque le document est complètement chargé
-document.addEventListener("DOMContentLoaded", initializeProjects);
-
 // Fonction pour récupérer les projets depuis l'API
 async function fetchProjects(apiUrl) {
     try {
@@ -95,3 +74,24 @@ function displayProjectsCards(projects) {
         }
     });
 }
+
+// Fonction principale pour initialiser l'application
+async function initializeProjects() {
+    // Définit l'URL de l'API des projets
+    const apiUrl = "http://localhost:5678/api/works";
+
+    // Récupère les projets depuis l'API
+    const projects = await fetchProjects(apiUrl);
+
+    // Si les projets sont récupérés avec succès
+    if (projects) {
+        // Affiche les projets dans la console pour vérification
+        console.log(projects);
+
+        // Crée les cartes avec les projets récupérés
+        displayProjectsCards(projects);
+    }
+}
+
+// Ajoute un écouteur d'événement pour initialiser les projets lorsque le document est complètement chargé
+document.addEventListener("DOMContentLoaded", initializeProjects);

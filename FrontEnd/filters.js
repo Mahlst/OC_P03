@@ -1,27 +1,3 @@
-// Fonction principale pour initialiser l'application
-async function initializeFilters() {
-    // Définit l'URL de l'API des catégories
-    const apiUrl = "http://localhost:5678/api/categories";
-
-    // Récupère les catégories depuis l'API
-    const categories = await fetchCategories(apiUrl);
-
-    // Si les catégories sont récupérées avec succès
-    if (categories) {
-        // Affiche les catégories dans la console pour vérification
-        console.log(categories);
-
-        // Crée les boutons de filtre avec les catégories récupérées
-        createFilterButtons(categories);
-
-        // Ajoute les écouteurs d'événements aux boutons de filtre
-        addFilterButtonListeners();
-    }
-}
-
-// Ajoute un écouteur d'événement pour initialiser les filtres lorsque le document est complètement chargé
-document.addEventListener("DOMContentLoaded", initializeFilters);
-
 // Fonction pour récupérer les catégories depuis l'API
 async function fetchCategories(apiUrl) {
     try {
@@ -116,3 +92,27 @@ function filterProjects(category) {
         }
     });
 }
+
+// Fonction principale pour initialiser l'application
+async function initializeFilters() {
+    // Définit l'URL de l'API des catégories
+    const apiUrl = "http://localhost:5678/api/categories";
+
+    // Récupère les catégories depuis l'API
+    const categories = await fetchCategories(apiUrl);
+
+    // Si les catégories sont récupérées avec succès
+    if (categories) {
+        // Affiche les catégories dans la console pour vérification
+        console.log(categories);
+
+        // Crée les boutons de filtre avec les catégories récupérées
+        createFilterButtons(categories);
+
+        // Ajoute les écouteurs d'événements aux boutons de filtre
+        addFilterButtonListeners();
+    }
+}
+
+// Ajoute un écouteur d'événement pour initialiser les filtres lorsque le document est complètement chargé
+document.addEventListener("DOMContentLoaded", initializeFilters);
