@@ -85,8 +85,10 @@ async function insertModalForm() {
                 </select>
                 <i class="fa-solid fa-chevron-down"></i>
             </div>
-            <hr class="modal-separator">
-            <button class="modal-btn modal-btn-form pointer button-disabled" type="submit" disabled>Valider</button>
+            <div class="modal-hr-btn">
+                <hr class="modal-separator">
+                <button class="modal-btn modal-btn-form pointer button-disabled" type="submit" disabled>Valider</button>
+            </div>
         </form>
     `;
 
