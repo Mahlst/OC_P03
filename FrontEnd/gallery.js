@@ -59,20 +59,11 @@ function displayProjectsCards(projects) {
     // Efface le contenu précédent pour éviter la duplication
     projectsContainer.innerHTML = ""; 
 
-    // Parcourt chaque projet récupéré
-    projects.forEach(project => {
-        // Crée une carte de projet en utilisant la fonction createProjectsCard
-        let projectCard = createProjectsCard(project);
-        
-        // Vérifie si la carte de projet a été créée correctement
-        if (projectCard) {
-            // Ajoute la carte de projet au conteneur de la galerie
-            projectsContainer.appendChild(projectCard);
-        } else {
-            // Affiche une erreur dans la console si la carte de projet n'a pas pu être créée
-            console.error("La carte de projet n'a pas pu être créée pour le projet :", project);
-        }
-    });
+    // Utilise .map pour créer les cartes de projet et les ajoute au conteneur de la galerie
+    const projectCards = projects.map(project => createProjectsCard(project));
+
+    // Ajoute les cartes de projet au conteneur de la galerie en une seule opération
+    projectsContainer.append(...projectCards);
 }
 
 // Fonction principale pour initialiser l'application

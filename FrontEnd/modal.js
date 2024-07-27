@@ -130,10 +130,8 @@ function createProjectsCardModal(project) {
 function displayProjectsCardsModal(projects) {
     const projectsContainer = document.querySelector("div.modal-gallery"); // Sélectionne l'élément avec la classe .modal-gallery
     projectsContainer.innerHTML = ""; // Vide le conteneur des projets
-    projects.forEach(project => {
-        const projectCard = createProjectsCardModal(project); // Crée une carte de projet pour chaque projet
-        projectsContainer.appendChild(projectCard); // Ajoute la carte de projet au conteneur
-    });
+    const projectCards = projects.map(project => createProjectsCardModal(project)); // Utilise .map pour créer les cartes de projet
+    projectsContainer.append(...projectCards); // Ajoute toutes les cartes de projet au conteneur
 }
 
 // Supprime un projet via l'API
@@ -374,7 +372,7 @@ document.addEventListener("DOMContentLoaded", () => {
     if (token) { // Vérifie si le token existe
         initializeAuthenticatedState(); // Initialise l'état authentifié
         
-        document.querySelectorAll('.modal-open').forEach(button => { // Sélectionne tous les éléments pour ouvrir le modal
+        Array.from(document.querySelectorAll('.modal-open')).map(button => { // Sélectionne tous les éléments pour ouvrir le modal
             button.addEventListener('click', () => { // Ajoute un écouteur d'événement pour le clic
                 const modalContainer = document.querySelector('.modal-container'); // Sélectionne le conteneur du modal
                 if (modalContainer) { // Vérifie si le conteneur existe
@@ -386,6 +384,6 @@ document.addEventListener("DOMContentLoaded", () => {
         addCloseModalListener(); // Ajoute l'écouteur pour fermer le modal
         addReturnModalListener(); // Ajoute l'écouteur pour retourner au modal précédent
     } else {
-        document.querySelectorAll(".auth-required").forEach(element => element.remove()); // Supprime tous les éléments nécessitant une authentification
+        Array.from(document.querySelectorAll(".auth-required")).map(element => element.remove()); // Supprime tous les éléments nécessitant une authentification
     }
 });

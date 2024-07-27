@@ -1,3 +1,6 @@
+// Variable pour stocker les projets d'origine
+let originalProjects = [];
+
 // Fonction pour récupérer les catégories depuis l'API
 async function fetchCategories(apiUrl) {
     try {
@@ -26,8 +29,8 @@ function createFilterButtons(categories) {
     // Sélectionne le conteneur des filtres dans le document HTML
     const filterContainer = document.querySelector("div.filter");
 
-    // Parcourt chaque catégorie pour créer un bouton de filtre
-    categories.forEach(category => {
+    // Utilise .map pour parcourir chaque catégorie et créer un bouton de filtre
+    categories.map(category => {
         // Crée un nouvel élément de bouton
         let button = document.createElement("button");
 
@@ -52,11 +55,11 @@ function addFilterButtonListeners() {
     // Sélectionne tous les boutons de filtre dans le conteneur
     const buttons = document.querySelectorAll("div.filter button");
 
-    // Ajoute un écouteur d'événement à chaque bouton
-    buttons.forEach(button => {
+    // Convertit la NodeList en tableau et utilise .map pour ajouter un écouteur d'événement à chaque bouton
+    Array.from(buttons).map(button => {
         button.addEventListener("click", () => {
-            // Retire la classe 'filter-active' de tous les boutons
-            buttons.forEach(button => button.classList.remove('filter-active'));
+            // Utilise .map pour retirer la classe 'filter-active' de tous les boutons
+            Array.from(buttons).map(button => button.classList.remove('filter-active'));
 
             // Ajoute la classe 'filter-active' au bouton cliqué
             button.classList.add('filter-active');
@@ -72,25 +75,18 @@ function addFilterButtonListeners() {
 
 // Fonction pour filtrer les projets en fonction de la catégorie sélectionnée
 function filterProjects(category) {
-    // Sélectionne tous les éléments <figure> dans le conteneur de la galerie et les convertit en tableau
-    const projects = Array.from(document.querySelectorAll("div.gallery figure"));
-
     // Filtre les projets selon la catégorie sélectionnée
-    const filteredProjects = projects.filter(project => {
+    const filteredProjects = originalProjects.filter(project => {
         // Retourne true si la catégorie est "0" (tous les projets) ou si la catégorie du projet correspond à celle sélectionnée
         return category === "0" || project.getAttribute("data-category") === category;
     });
 
-    // Parcourt chaque projet pour afficher les projets filtrés et masquer les autres
-    projects.forEach(project => {
-        // Si le projet est dans la liste des projets filtrés, il est affiché
-        if (filteredProjects.includes(project)) {
-            project.style.display = "";
-        } else {
-            // Sinon, il est masqué
-            project.style.display = "none";
-        }
-    });
+    // Met à jour le conteneur de la galerie avec les projets filtrés
+    const galleryContainer = document.querySelector("div.gallery");
+    galleryContainer.innerHTML = ""; // Vide le conteneur
+
+    // Utilise .map pour ajouter les projets filtrés au conteneur de la galerie
+    filteredProjects.map(project => galleryContainer.appendChild(project));
 }
 
 // Fonction principale pour initialiser l'application
@@ -112,6 +108,9 @@ async function initializeFilters() {
         // Ajoute les écouteurs d'événements aux boutons de filtre
         addFilterButtonListeners();
     }
+
+    // Sélectionne tous les éléments <figure> dans le conteneur de la galerie et les stocke dans originalProjects
+    originalProjects = Array.from(document.querySelectorAll("div.gallery figure"));
 }
 
 // Ajoute un écouteur d'événement pour initialiser les filtres lorsque le document est complètement chargé
